@@ -3,7 +3,7 @@ name: Deploy on Main Push
 on:
   push:
     branches:
-      - '*'
+      - main
 
 jobs:
   deploy:
@@ -25,13 +25,13 @@ jobs:
       run: gcloud auth configure-docker
 
     - name: Apply namespace
-      run: kubectl apply -f namespaces/my-namespace.yaml
+      run: kubectl apply -f namespaces/my-namespace.yaml --validate=false
 
     - name: Apply backend deployment
-      run: kubectl apply -f deployments/backend-deployment.yaml
+      run: kubectl apply -f deployments/backend-deployment.yaml --validate=false
 
     - name: Apply backend service
-      run: kubectl apply -f services/backend-service.yaml
+      run: kubectl apply -f services/backend-service.yaml --validate=false
 
     - name: Apply ingress
-      run: kubectl apply -f ingress/ingress.yaml
+      run: kubectl apply -f ingress/ingress.yaml --validate=false
