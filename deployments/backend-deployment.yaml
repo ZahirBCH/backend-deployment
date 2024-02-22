@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: dns-app-backend
-        image: your-registry/backend-image:latest
+        image: europe-west9-docker.pkg.dev/my-lab-production-415107/my-lab-artifact-registry/dns-explorer:1.0.0
         ports:
         - containerPort: 5000
