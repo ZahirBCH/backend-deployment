@@ -25,13 +25,13 @@ jobs:
       run: gcloud auth configure-docker
 
     - name: Apply namespace
-      run: kubectl apply -f my-namespace.yaml
+      run: kubectl apply -f namespaces/my-namespace.yaml
 
     - name: Apply backend deployment
-      run: kubectl apply -f backend-deployment.yaml
+      run: kubectl apply -f deployments/backend-deployment.yaml
 
     - name: Apply backend service
-      run: kubectl apply -f backend-service.yaml
+      run: kubectl apply -f services/backend-service.yaml
 
     - name: Apply ingress
-      run: kubectl apply -f ingress.yaml
+      run: kubectl apply -f ingress/ingress.yaml
