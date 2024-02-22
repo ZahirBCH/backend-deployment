@@ -1,0 +1,37 @@
+name: Deploy on Main Push
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.3.0
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Configure Docker to use gcloud
+      run: gcloud auth configure-docker
+
+    - name: Apply namespace
+      run: kubectl apply -f my-namespace.yaml
+
+    - name: Apply backend deployment
+      run: kubectl apply -f backend-deployment.yaml
+
+    - name: Apply backend service
+      run: kubectl apply -f backend-service.yaml
+
+    - name: Apply ingress
+      run: kubectl apply -f ingress.yaml
