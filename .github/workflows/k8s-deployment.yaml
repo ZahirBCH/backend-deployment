@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+        sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+        kubectl plugin install https://github.com/GoogleCloudPlatform/gke-gcloud-auth-plugin/releases/latest/download/gke-gcloud-auth.tar.gz
+      
     - name: Checkout repository
       uses: actions/checkout@v2
 
