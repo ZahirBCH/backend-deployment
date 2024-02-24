@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dns-explorer-app
+spec:
+  replicas: 3 # Nombre de répliques de ton application
+  selector:
+    matchLabels:
+      app: dns-explorer
+  template:
+    metadata:
+      labels:
+        app: dns-explorer
+    spec:
+      containers:
+      - name: dns-explorer
+        image: europe-west9-docker.pkg.dev/my-lab-production-415213/my-lab-artifact-registry/dns-explorer:1.0.0
+        ports:
+        - containerPort: 5000 # Le port sur lequel ton application Flask écoute
